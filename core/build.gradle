@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.+")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web:1.+")
+    compile("org.springframework.boot:spring-boot-starter-actuator:1.+")
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.+'
+    compile 'com.h2database:h2:1.4.191'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc:1.+'
+    compile 'org.apache.commons:commons-dbcp2:2.+'
+    compile 'org.apache.commons:commons-lang3:3.+'
+    compile 'org.apache.commons:commons-collections4:4.+'
+    compile 'commons-validator:commons-validator:1.+'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
+    compile group: 'net.sf.oval', name: 'oval', version: '1.90'
+    compile 'com.squareup.retrofit2:retrofit:2.+'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.+'
+    compile 'com.squareup.retrofit2:converter-jackson:2.+'
+    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.+'
+    compile 'org.apache.httpcomponents:httpclient:4.+'
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.+"
+}
+
+task release(dependsOn: 'build', overwrite: true) {
+}

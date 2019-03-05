@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+processResources.dependsOn('copyConfig')
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile project(':core')
+    compile project(':peers')
+    compile project(':files')
+    compile project(':videos')
+    compile project(':gui')
+    compile project(':guifx')
+}
+
+task copyConfig(type: Copy) {
+    from getRootConfigDir(project) into "$projectDir/src/main/resources"
+    from getConfigDir(project) into "$projectDir/src/main/resources"
+}
+
+task release(dependsOn: 'build', overwrite: true) {
+}
+
+mainClassName = "com.p2p.P2PApplication"
+
+distributions {
+    main {
+        contents {
+            from { "${project.rootDir}/custom/" }
+        }
+    }
+}

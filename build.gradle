@@ -1,0 +1,70 @@
+buildscript {
+    repositories { jcenter() }
+
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-aggregate-javadocs-plugin:2.2.+'
+    }
+}
+
+apply plugin: 'nebula-aggregate-javadocs'
+
+allprojects {
+    group = 'com.p2p'
+
+    task release << { println 'Starting the build' }
+
+    Properties applicationProps = new Properties()
+
+    ext.getConfigDir = { project ->
+        def configDir = 'peer1'
+        if (project.hasProperty('env')) {
+            configDir = "${project.getProperty('env')}"
+        }
+        return "${project.projectDir}/config/$configDir"
+    }
+
+    ext.getRootConfigDir = { project ->
+        def configDir = 'peer1'
+        if (project.hasProperty('env')) {
+            configDir = "${project.getProperty('env')}"
+        }
+        return "${project.rootDir}/config/$configDir"
+    }
+
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled false
+            html.enabled true
+        }
+    }
+
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+
+    apply plugin: 'findbugs'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    test {
+        testLogging {
+            events "passed", "skipped", "failed", "standardOut", "standardError"
+        }
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.+'
+        testCompile 'org.hamcrest:hamcrest-library:1.+'
+        testCompile 'org.springframework:spring-test:4.+'
+
+        testCompile 'org.apache.httpcomponents:httpclient:4.+'
+
+    }
+
+}

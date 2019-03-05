@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+    <property name="driverClassName" value="${com.xin.db.driverClassName}"></property>
+    <property name="url" value="${com.xin.db.url}"></property>
+    <property name="username" value="${com.xin.db.userName}"></property>
+    <property name="password" value="${com.xin.db.password}"></property>
+  </bean>
+
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"></property>
+    <property name="packagesToScan" value="com.xin" />
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="hibernate.format_sql">true</prop>
+      </props>
+    </property>
+  </bean>
+
+  <tx:annotation-driven />
+  <bean id="transactionManager"
+    class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+    p:sessionFactory-ref="sessionFactory" />
+</beans>

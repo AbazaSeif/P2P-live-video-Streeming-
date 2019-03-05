@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'com.p2p'
+version 'unspecified'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':core')
+    compile project(':files')
+    compile project(':videos')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

@@ -1,0 +1,10 @@
+
+
+include 'core','app','peers';
+
+rootProject.name = 'proto'
+include 'files'
+include 'videos'
+include 'gui'
+include 'guifx'
+

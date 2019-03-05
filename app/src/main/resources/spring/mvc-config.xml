@@ -1,0 +1,58 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+   http://www.springframework.org/schema/beans     
+   http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+   ">
+
+    <context:annotation-config/>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean
+                    class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+            <!-- <bean -->
+            <!-- class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"
+              /> -->
+            <bean
+                    class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <ref bean="hhObjectMapper"/>
+                </property>
+            </bean>
+
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="snakeCaseObjectMapper"
+          class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+        <property name="propertyNamingStrategy" value="SNAKE_CASE"/>
+    </bean>
+
+    <bean id="hhObjectMapper"
+          class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="snakeCaseObjectMapper"/>
+        <property name="targetMethod" value="disable"/>
+        <property name="arguments" value="WRITE_DATES_AS_TIMESTAMPS"/>
+    </bean>
+    <!-- <bean -->
+    <!-- class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"
+      /> -->
+
+    <bean id="ovalGuardInterceptor" class="net.sf.oval.guard.GuardInterceptor"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="proxyTargetClass" value="true"/>
+        <property name="beanNames" value="*Service"/>
+        <property name="interceptorNames">
+            <list>
+                <value>ovalGuardInterceptor</value>
+            </list>
+        </property>
+    </bean>
+</beans>

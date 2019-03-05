@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.p2p.guifx.controllers.MainPageFXController"
+          prefHeight="400.0" prefWidth="600.0"
+          alignment="center"
+          hgap="10" vgap="10">
+    <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+    <columnConstraints>
+        <ColumnConstraints minWidth="100" prefWidth="100"
+                           maxWidth="Infinity" halignment="RIGHT">
+        </ColumnConstraints>
+        <ColumnConstraints minWidth="200" prefWidth="200"
+                           maxWidth="Infinity" hgrow="ALWAYS">
+        </ColumnConstraints>
+    </columnConstraints>
+
+    <Label text="P2P Service" GridPane.columnIndex="0"
+           GridPane.rowIndex="0" GridPane.columnSpan="2"
+           GridPane.rowSpan="1" GridPane.halignment="CENTER" >
+        <font>
+            <Font name="Arial" size="24" ></Font>
+        </font>
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Label>
+
+    <!-- Add Start Button -->
+    <Button fx:id="startStreamButton" text="Start Stream 2"
+            prefHeight="40"
+            GridPane.columnIndex="0" GridPane.rowIndex="1"
+            GridPane.columnSpan="4" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER"
+            onAction="#handleStartStreamButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
+
+    <!-- Add Join Button -->
+    <Button fx:id="joinStreamButton" text="Join Stream 2"
+            prefHeight="40"
+            GridPane.columnIndex="0" GridPane.rowIndex="2"
+            GridPane.columnSpan="4" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER"
+            onAction="#handleJoinStreamButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
+</GridPane>

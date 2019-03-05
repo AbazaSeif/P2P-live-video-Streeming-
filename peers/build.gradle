@@ -1,0 +1,14 @@
+apply plugin:'java'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+	compile project(':core')
+}
+
+task release(dependsOn:'build',overwrite:true){
+}

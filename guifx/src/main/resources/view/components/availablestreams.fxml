@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.p2p.guifx.controllers.AvailableStreamsController"
+          prefHeight="400.0" prefWidth="600.0"
+          alignment="center"
+          hgap="10" vgap="10">
+    <padding>
+        <Insets top="40" right="40" bottom="40" left="40"/>
+    </padding>
+    <columnConstraints>
+        <ColumnConstraints minWidth="100" prefWidth="100"
+                           maxWidth="Infinity" halignment="RIGHT">
+        </ColumnConstraints>
+        <ColumnConstraints minWidth="200" prefWidth="200"
+                           maxWidth="Infinity" hgrow="ALWAYS">
+        </ColumnConstraints>
+    </columnConstraints>
+
+    <Button fx:id="joinStreamButton" text="Reload Files"
+            prefHeight="40"
+            GridPane.columnIndex="0" GridPane.rowIndex="0"
+            GridPane.columnSpan="4" GridPane.rowSpan="1"
+            GridPane.halignment="CENTER"
+            onAction="#reloadStreams">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
+
+    <TableView fx:id="tableView" GridPane.columnIndex="0"
+               GridPane.rowIndex="1" GridPane.columnSpan="9"
+               GridPane.rowSpan="5" GridPane.halignment="CENTER">
+        <columns>
+            <TableColumn text="Peer IP" fx:id="peerIp"/>
+            <TableColumn text="Duration" fx:id="streamDuration"/>
+            <TableColumn text="Stream Name" fx:id="streamName"/>
+            <TableColumn text="Started At" fx:id="streamStartedAt"/>
+            <TableColumn text="Action" fx:id="actionButton"/>
+
+        </columns>
+    </TableView>
+    <Button fx:id="goToMainPageButton" text="Go To Main page"
+            prefHeight="40"
+            GridPane.columnIndex="5" GridPane.rowIndex="0"
+            GridPane.columnSpan="4" GridPane.rowSpan="2"
+            GridPane.halignment="CENTER"
+            onAction="#goToMainPageButton">
+        <GridPane.margin>
+            <Insets top="20" right="0" bottom="20" left="0"></Insets>
+        </GridPane.margin>
+    </Button>
+</GridPane>

@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile project(':core')
+    compile project(':files')
+    compile group: 'uk.co.caprica', name: 'vlcj', version: '3.9.0'
+}
+
+task release(dependsOn: 'build', overwrite: true) {
+}
